@@ -1,0 +1,23 @@
+# Created to run the Development LLM Environment
+name: eo-llm-dev-01
+
+services:
+  frontend:
+    container_name: openwebui-01
+    hostname: openwebui-01
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./llm-fe/openwebui:/app/backend/data
+    restart: unless-stopped
+
+  backend:
+    container_name: ollama-01
+    hostname: ollama-01
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./llm-be/ollama:/root/.ollama
+    restart: unless-stopped
