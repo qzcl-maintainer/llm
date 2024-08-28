@@ -21,3 +21,14 @@ services:
     volumes:
       - ./llm-be/ollama:/root/.ollama
     restart: unless-stopped
+  
+  pipeline:
+    container_name: pipeline-01
+    hostname: pipeline-01
+    image: ghcr.io/open-webui/pipelines:main
+    ports:
+      - "9099:9099"
+    volumes:
+      - ./llm-pl:/app/pipelines
+    restart: unless-stopped
+    # Workaround python3 -m pip install nltk==3.9b1
